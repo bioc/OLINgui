@@ -1,5 +1,4 @@
 OLINgui <- function(){
-
 ##### DEFINITION OF WIDGETS
 nenv <- new.env(hash=TRUE,parent=parent.frame())
 gui <- tktoplevel()
@@ -435,7 +434,7 @@ normalise <- function(){
             
           }
          #  tkdestroy(gui.wait)
-          #  assign("obj.norm",obj.norm,nenv)
+            assign("obj.norm",obj.norm,nenv)
          
 
 }
@@ -1219,5 +1218,4 @@ desguiolin <- function(){
            tkdestroy(gui)
       }
 tkconfigure(gui.51b,command=desguiolin)
-
 }
