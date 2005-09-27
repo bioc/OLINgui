@@ -5,7 +5,7 @@
 
 \documentclass[a4paper,11pt]{article}
 \usepackage{a4wide}
-\title{Introduction to OLINgui }
+\title{Introduction to OLINgui \\ \large{-- Version 1.1.0 --} }
 \author{Matthias E. Futschik\\ Institute for Theoretical Biology,  Humboldt-University\\ URL: \textit{http://itb.biologie.hu-berlin.de/$\sim$futschik/software/R/OLIN}}
 \usepackage{/usr/lib/R/share/texmf/Sweave}
 \begin{document}
@@ -39,9 +39,9 @@ and the reference~\cite{toni}.
 \section{Installation requirements}
 Following software is required to run the OLINgui-package:
 \begin{itemize} 
-\item  R (> 1.9.0). For installation of R, refer to \textit{http://www.r-project.org}.
+\item  R (>= 2.0.0). For installation of R, refer to \textit{http://www.r-project.org}.
 \item  R-packages: methods, stat, locfit, tcltk. For installation of these add-on packages, refer to \textit{http://cran.r-project.org}.
-\item Bioconductor packages: Biobase, marray, OLIN. Refer to \textit{http://www.bioconductor.org} for installation. 
+\item Bioconductor packages: Biobase, marray, OLIN (>= 1.4.0). Refer to \textit{http://www.bioconductor.org} for installation. 
 \end{itemize}
 
 If all requirements are fulfilled, the OLINgui add-on R-package can be installed.\
@@ -111,7 +111,7 @@ and subsequently loaded for analysis using the \fbox{Browse objects} buttons.
 \centering
 \centering
 \resizebox{0.5\textwidth}{!}{\includegraphics{OLINguiScreenshot.pdf}}
-\caption{Screen-shot of OLINgui}
+\caption{Screen-shot of OLINgui (version 1.0.1)}
 \label{fgbg}
 \end{figure}
 
@@ -265,15 +265,24 @@ the output of the underlying functions that has been used for the statistical an
 
 \subsection{Normalisation}
 \begin{itemize}
-\item \textit{OLIN - OSLIN radiobuttons}: Selection which normalisation scheme should be applied.
+\item \textit{IN, OIN, LIN, OLIN, OSLIN radiobuttons}: Selection which normalisation scheme should be applied. For
+a description of these methods, see the \emph{OLIN help pages}.
 
-\item \textit{Smooting}: Vector of smoothing parameter to be tested for optimised normalisation. 
 
-\item \textit{Scaling}: Vector of scaling parameter to be tested for optimised normalisation.
+\item \textit{Smoothing}: Smoothing parameter(s) to be used or tested for  normalisation. It can be any 
+value between 0 and 1. Values close to 0, however, may produce unstable normalisation results. 
+The input  should be a scalar for IN and LIN. This value is then used for local regression. 
+It can be a space-delimited list for OIN, OLIN and OSLIN. These values are tested in the GCV procedure
+with the optimal smoothing parameter used subsequently for normalisation.     
+
+\item \textit{Scaling}: Scaling parameter(s) to be used or tested  for location-dependent normalisation.
 The scaling  parameter determines the amount of smoothing in Y-direction compared to smoothing
-in X-direction.  
+in X-direction. It is used for LIN/OLIN/OSLIN. The input can be a single value for LIN. Alternatively,
+\emph{TRUE} or \emph{FALSE} can be chosen. The input value \emph{TRUE} leads to scaling by the standard 
+deviation. No scaling is performed for the value \emph{FALSE}. 
+For OLIN or OSLIN, a list of values should be given. 
 
-\item \textit{Iterations}: Number of iterations in the  OLIN/OSLIN procedure. Three are usually sufficient. 
+\item \textit{Iterations}: Number of iterations in the  LIN/OLIN/OSLIN procedure. Three are usually sufficient. 
 
 \item \textit{Weights}: Weighting of spots for local regression. If the checkbutton is ticked,
 spots are weighted by the weights stored in \textit{maW} slot of the marray object.

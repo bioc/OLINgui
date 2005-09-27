@@ -38,15 +38,18 @@ gui.24l <- tklabel(gui,text="_______________________________________")
 # NORMALISATION 
 gui.31l <- tklabel(gui,text="NORMALISATION",fg="red")
 norm <- tclVar(); tclvalue(norm) <- "olin";
+gui.32re <- tkradiobutton(gui,text="IN",variable=norm,value="ino")
+gui.32rd <- tkradiobutton(gui,text="OIN",variable=norm,value="oin")
+gui.32rc <- tkradiobutton(gui,text="LIN",variable=norm,value="lin")
 gui.32ra <- tkradiobutton(gui,text="OLIN",variable=norm,value="olin")
 gui.32rb <- tkradiobutton(gui,text="OSLIN",variable=norm,value="oslin")
 alphavar <- tclVar(); alphavar <- seq(0.1,1,0.1);
 gui.33l <- tklabel(gui,text="Smoothing:")
-gui.33e <- tkentry(gui)
+gui.33e <- tkentry(gui,width=23)
 tkinsert(gui.33e,"end",alphavar)
 scalingvar <- tclVar(); scalingvar <- c(0.05, 0.1, 0.5, 1, 2, 10, 20);
 gui.34l <- tklabel(gui,text="Scaling:")
-gui.34e <- tkentry(gui)
+gui.34e <- tkentry(gui,width=23)
 tkinsert(gui.34e,"end",scalingvar)
 gui.35l <- tklabel(gui,text="Iterations:")
 iteravar <- tclVar(); iteravar <- 3;
@@ -78,7 +81,7 @@ gui.43bc <- tkbutton(gui,text="p int",width=width.4,bg="gray")
 gui.44ba <- tkbutton(gui,text="ANOVA spa",width=width.4,bg="gray")
 gui.44bb <- tkbutton(gui,text="FDR spa",width=width.4,bg="gray")
 gui.44bc <- tkbutton(gui,text="p spa",width=width.4,bg="gray")
-statsvisu <- tclVar(); statsvisu <- "1";
+statsvisu <- tclVar(); tclvalue(statsvisu) <- "1";
 gui.45c  <- tkcheckbutton(gui,text="Visualisation of results",variable=statsvisu)
 gui.46b <- tkbutton(gui,text="Save results")
 gui.46bb <- tkbutton(gui,text="Export results")
@@ -137,9 +140,12 @@ tkgrid(gui.39l)
 tkgrid.configure(gui.39l,columnspan=3)
 
 tkgrid(gui.31l,columnspan=4,column=0,sticky="w")
-tkgrid(gui.32ra,gui.32rb)
-tkgrid.configure(gui.32ra,column=1)
-tkgrid.configure(gui.32rb,column=2)
+tkgrid(gui.32re,gui.32rd)
+tkgrid.configure(gui.32re,column=1,sticky="w")
+tkgrid.configure(gui.32rd,column=2,sticky="w")
+tkgrid(gui.32rc,gui.32ra,gui.32rb)
+tkgrid.configure(gui.32ra,column=1,sticky="w")
+tkgrid.configure(gui.32rb,column=2,sticky="w")
 tkgrid(gui.33l,gui.33e)
 tkgrid.configure(gui.33e,column=1,columnspan=2,sticky="w")
 tkgrid.configure(gui.33l,sticky="e")
@@ -164,11 +170,138 @@ tkgrid.configure(gui.47l,columnspan=3)
 tkgrid(gui.51b)
 tkgrid.configure(gui.51b,columnspan=3)
 tkgrid(gui.52l)
-#### CONFIGURATION
 
+
+#### CONFIGURATION
 # MARRAY OBJECT LOADING
+
+objectBrowser2 <- function (env = .GlobalEnv, fun = function(x) TRUE, textToShow = "Select marray object",
+    nSelect = 1)
+  # based on objectBrower by Jianhua Zhang
+  # modified by Lokesh Kumar & Matthias Futschik
+{
+    LABELFONT1 <- "Helvetica 12 bold"
+    LABELFONT2 <- "Helvetica 11"
+    BUTWIDTH <- 8
+    selectedObj <- NULL
+    isPack <- FALSE
+    returnObj <- NULL
+    returnList <- NULL
+    selIndex <- NULL
+    objIndex <- NULL
+    objsInSel <- NULL
+    tempObj <- NULL
+    currentEnv <- env
+    currentState <- "env"
+    end <- function() {
+        tkgrab.release(base)
+        tkdestroy(base)
+    }
+    on.exit(end(), add = TRUE)
+    finish <- function() {
+        if (currentState != "env") {
+            returnList <<- objsInSel
+            end()
+        }
+        else {
+            if (length(objsInSel) != 0) {
+               
+                  if (nSelect != length(objsInSel)) {h
+                    tkmessageBox(title = "Wrong number", message = paste("You can only select",
+                      nSelect, "object(s)"), icon = "warning",
+                      type = "ok")
+                  }
+                  else {
+                    returnList <<- objNameToList(objsInSel, currentEnv)
+                    end()
+                  }
+                }
+            else {
+                returnList <<- NULL
+                end()
+            }
+        }
+    }
+
+   dClick <- function() {}
+   sClick <- function() {
+        selectedObj <<- NULL
+        if (currentState != "list") {
+            tkconfigure(selectBut, state = "normal")
+        }
+        selIndex <<- unlist(strsplit(as.character(tkcurselection(listView)),
+            " "))
+        if (length(selIndex) == 1) {
+            tempObj <<- as.character(tkget(listView, selIndex))
+        }
+        else {
+            for (i in selIndex) {
+               tempObj <<- c(tempObj, as.character(tkget(listView,
+                  i)))
+            }
+        }
+    }
+    
+   selClick <- function() {}
+   cancel <- function() {
+        objsInSel <<- NULL
+        finish()
+    }
+     
+   
+   selectObj <- function() {
+        objsInSel <<- c(objsInSel, tempObj)
+        objsInSel <<- unique(objsInSel)
+        #writeSelection(objsInSel)
+        tkconfigure(selectBut, state = "disabled")
+        finish()
+   }
+      
+   viewEnv <- function(env) {
+        writeList(listView, pickObjs(objNames = ls(env = env,
+            all = TRUE), fun = fun), clear = TRUE)
+          # writeCap(substitute(env))
+	}
+   
+   base <- tktoplevel()
+    tktitle(base) <- paste("Object Browser")
+    capFrame <- tkframe(base)
+    noteLabel <- tklabel(capFrame, text = textToShow, font = LABELFONT1)
+   
+    labl2 <- tklabel(capFrame, text = "Objects to select from", font = LABELFONT2)
+    
+    tkgrid(noteLabel, columnspan = 3)
+    tkgrid(labl2)
+    tkgrid(capFrame, columnspan = 2, padx = 10)
+    leftFrame <- tkframe(base)
+    listFrame <- tkframe(leftFrame)
+    listView <- makeViewer(listFrame)
+    tkgrid(listFrame, columnspan = 2)
+    tkconfigure(listView, selectmode = "extended", font = LABELFONT2)    
+    tkbind(listView, "<Double-Button-1>", dClick)
+    tkbind(listView, "<B1-ButtonRelease>", sClick)
+    butFrame <- tkframe(leftFrame)
+    selectBut <- tkbutton(butFrame, text = "Select", width = BUTWIDTH,
+        command = selectObj, state = "disabled")
+    #tkgrid(selectBut)  
+    #tkgrid(butFrame)
+    canBut <- tkbutton(butFrame, text = "Cancel", width = BUTWIDTH,
+        command = cancel)
+    #endBut <- tkbutton(butFrame, text = "Finish", width = BUTWIDTH,
+    #    command = finish)
+    tkgrid(canBut,selectBut)
+    tkgrid(butFrame)
+    tkgrid(leftFrame)
+    viewEnv(env)
+    tkgrab.set(base)
+    tkwait.window(base)
+    return(returnList)
+}
+
+##################################################################################
+
 browseObject <- function(){
-           tmp <- objectBrowser()
+           tmp <- objectBrowser2()
            if (!(is.null(tmp))){
               if ((class(tmp[[1]])=="marrayRaw")|(class(tmp[[1]])=="marrayNorm")){
               	assign("obj",tmp[[1]],nenv)
@@ -186,7 +319,7 @@ tkconfigure(gui.12ba,command=browseObject)
 
 browseFile <- function(){
             envtmp <- new.env(hash=TRUE,parent=parent.frame()) 
-            file <- fileBrowser()[[1]]
+            file <- fileBrowser(nSelect = 1,textToShow = "Select Rdata file with marray object")[[1]]
             if (!(is.null(file))){
             tmp <- try(load(file,envtmp),TRUE)
             if (class(tmp)=="try-error"){  
@@ -212,7 +345,7 @@ tkconfigure(gui.12bb,command=browseFile)
 
 ### XY-LIST LOADING
 browseObject2 <- function(){
-           tmp <- objectBrowser()
+           tmp <- objectBrowser2()
            if (!is.list(tmp[[1]])|(length(tmp[[1]])!=2)|(!all(attributes(tmp[[1]])$names == c("X","Y")))){
                 tkmessageBox(message="List is not of correct format")
                 return()
@@ -228,7 +361,7 @@ tkconfigure(gui.13ba,command=browseObject2)
 
 browseFile2 <- function(){
             envtmp <- new.env(hash=TRUE,parent=parent.frame()) 
-            file <- fileBrowser()[[1]]
+            file <- fileBrowser( nSelect = 1,textToShow="Select Rdata file with xy - list")[[1]]
              if (!(is.null(file))){
              tmp <- try(load(file,envtmp),TRUE)
             if (class(tmp)=="try-error"){  
@@ -245,6 +378,7 @@ browseFile2 <- function(){
             rm(list=ls(envtmp),envir=nenvtmp); rm(tmp);
             }
  }
+
 tkconfigure(gui.13bb,command=browseFile2)
 
 
@@ -391,22 +525,85 @@ normalise <- function(){
               Y <- get("xy",nenv)$X
           }
           
-          ALPHA    <- as.real(strsplit(tclvalue(tkget(gui.33e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.33e))," ")[[1]]))]
-          SCALE  <- as.real(strsplit(tclvalue(tkget(gui.34e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.34e))," ")[[1]]))]
           
-       
+          ALPHA    <- as.real(strsplit(tclvalue(tkget(gui.33e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.33e))," ")[[1]]))]
+          if ((tclvalue(tkget(gui.34e))!="TRUE")&(tclvalue(tkget(gui.34e))!="FALSE")){
+          SCALE  <- as.real(strsplit(tclvalue(tkget(gui.34e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.34e))," ")[[1]]))]
+          } else {
+         SCALE  <- tclvalue(tkget(gui.34e))
+         }
+
          # gui.wait <- tktoplevel()
          # tktitle(gui.wait) <- "Wait"
          # gui.wait.l <- tklabel(gui.wait,text="Please wait..",fg="red")
          # tkgrid(gui.wait.l)
           if (tclvalue(weightsvar)=="1"){ 
- 		obj.norm <- olin(object=get("obj",nenv),X=X,Y=Y,
+               if ((tclvalue(norm)=="olin") | (tclvalue(norm)=="oslin")){
+ 	       obj.norm <- olin(object=get("obj",nenv),X=X,Y=Y,
                       alpha=ALPHA,scale= SCALE,iter=as.integer(tclvalue(tkget(gui.35e))),
-                      scaling=SCALING,weights= maW(get("obj",nenv)))
+                      OSLIN=SCALING,weights= maW(get("obj",nenv)))
+                }
+               if (tclvalue(norm)=="lin"){
+                 if (length(ALPHA)!=1 ){
+                   tkmessageBox(message="Only 1  smoothing paramater is used for LIN")
+                   return()
+                 }
+                 if (length(SCALE)!=1 ){
+                   tkmessageBox(message="For LIN, scaling parameter should be either TRUE or FALSE or a positive real number")
+                   return()
+                 }
+                 obj.norm <- lin(object=get("obj",nenv),X=X,Y=Y,
+                      alpha=ALPHA,scale= SCALE,iter=as.integer(tclvalue(tkget(gui.35e))),
+                      weights= maW(get("obj",nenv)))
+                   }
+              ###############
+                 if (tclvalue(norm)=="oin"){
+
+                 obj.norm <- oin(object=get("obj",nenv),alpha=ALPHA,weights= maW(get("obj",nenv)))
+                 }
+                 ###############
+                if (tclvalue(norm)=="ino"){
+                 if (length(ALPHA)!=1 ){
+                   tkmessageBox(message="Only 1  smoothing paramater is used for IN")
+                   return()
+                   }
+                 obj.norm <- ino(object=get("obj",nenv),alpha=ALPHA,weights= maW(get("obj",nenv)))
+                 }
+
                       } else {
-               obj.norm <- olin(object=get("obj",nenv),X=X,Y=Y,
+                #########################
+                if ((tclvalue(norm)=="olin") | (tclvalue(norm)=="oslin")){
+                 obj.norm <- olin(object=get("obj",nenv),X=X,Y=Y,
                       alpha=ALPHA,scale= SCALE,iter=as.integer(tclvalue(tkget(gui.35e))),
-                      scaling=SCALING)
+                      OSLIN=SCALING)
+                }
+               #####################
+               if (tclvalue(norm)=="lin"){
+                 if (length(ALPHA)!=1 ){
+                   tkmessageBox(message="Only 1  smoothing paramater is used for LIN")
+                   return()
+                 }
+                 if (length(SCALE)!=1 ){
+                   tkmessageBox(message="For LIN, scaling parameter should be either TRUE or FALSE or a positive real number")
+                   return()
+                 }
+                 obj.norm <- lin(object=get("obj",nenv),X=X,Y=Y,
+                      alpha=ALPHA,scale= SCALE,iter=as.integer(tclvalue(tkget(gui.35e))))
+                 }
+                 #########################
+                 if (tclvalue(norm)=="oin"){
+
+                 obj.norm <- oin(object=get("obj",nenv),alpha=ALPHA)
+                 }
+                 ###############
+                if (tclvalue(norm)=="ino"){
+                 if (length(ALPHA)!=1 ){
+                   tkmessageBox(message="Only 1  smoothing paramater is used for IN")
+                   return()
+                   }
+                 obj.norm <- ino(object=get("obj",nenv),alpha=ALPHA)
+                 }
+
            }
           
                       

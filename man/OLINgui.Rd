@@ -28,10 +28,18 @@ For a overview of the functionality of OLINgui, please refer to the package docu
 }
 \value{OLINgui returns a tclObj object.}
 }
-\references{ M.Futschik and T.Crompton (2004) \emph{Model selection and efficiency testing for normalization of cDNA microarray data},
+\references{
+
+\enumerate{
+\item M.Futschik and T.Crompton (2004) \emph{Model selection and efficiency testing for normalization of cDNA microarray data},
 \strong{Genome Biology}, 5:R60
- }
-\author{ Matthias E. Futschik (\url{http://itb.biologie.hu-berlin.de/~futschik})}
+\item M.Futschik and T.Crompton (2005) \emph{OLIN: Optimized
+      normalization, visualization and quality testing for two-channel
+      microarray data}, \strong{Bioinformatics}, 21(8):1724-6    
+\item  OLIN web-page: \url{http://itb.biologie.hu-berlin.de/~futschik/software/R/OLIN}}}
+
+\author{ Matthias E. Futschik
+(\url{http://itb.biologie.hu-berlin.de/~futschik})}
 \note{ The newest versions of \code{OLINgui} can be found at the OLIN webpage 
  (\url{http://itb.biologie.hu-berlin.de/~futschik/software/R/OLIN}).}
 
