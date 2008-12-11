@@ -1,8 +1,8 @@
 Package: OLINgui
 Version: 1.17.0
-Date: 2006-01-05
+Date: 2008-12-11
 Title:  Graphical user interface for OLIN 
-Author: Matthias Futschik <m.futschik@biologie.hu-berlin.de>
+Author: Matthias Futschik <mfutschik@ualg.pt>
 Maintainer:  Matthias Futschik <m.futschik@biologie.hu-berlin.de>
 Depends: R (>= 2.0.0), OLIN (>= 1.4.0)
 Suggests:  tcltk, tkWidgets
