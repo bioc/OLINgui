@@ -1,4 +1,2 @@
-export(OLINgui)
-import( tcltk, tkWidgets, OLIN)
-      
+export(OLINgui)      
                
