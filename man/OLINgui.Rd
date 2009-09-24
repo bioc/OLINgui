@@ -19,7 +19,7 @@ are used. To fine-tune plots, the underlying plotting functions in the OLIN pack
 can be applied. 
     
 The usage of OLINgui assumes existing marray objects for the batch of arrays to 
-be analysed and normalised.  To construct marray objects using a graphical interface, refer to  \code{\link[marrayInput]{read.marrayRaw}}.
+be analysed and normalised.  To construct marray objects using a graphical interface, refer to  \code{\link[marray:read.marrayRaw]{read.marrayRaw}}.
 Some underlying functions (e.g.\code{\link[OLIN]{mxy2.plot}} and optinally \code{\link[OLIN]{olin}})
 ) require an additonal list of X- and Y-coordinates of spots. 
 This has to be done \dQuote{by hand} yet. However, most functions do not need this list.  
