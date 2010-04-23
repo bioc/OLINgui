@@ -1,2 +1,23 @@
+importMethodsFrom(marray, maA, maM, maNgc, maNgr, maNsc, maNsr, maW)
+
+importFrom(graphics, plot)
+
+importFrom(OLIN, anovaint, anovapin, anovaplate, anovaspatial, bas,
+           fdr.int, fdr.spatial, fgbg.visu, ino, lin, mxy.plot,
+           mxy2.plot, oin, olin, p.int, p.spatial, sigint.plot,
+           sigxy.plot, v2m)
+
+importFrom(tcltk, tclvalue, "tclvalue<-", tclVar, tkbind, tkbutton,
+           tkcheckbutton, tkconfigure, tkcurselection, tkdelete,
+           tkdestroy, tkentry, tkframe, tkget, tkgetSaveFile,
+           tkgrab.release, tkgrab.set, tkgrid, tkgrid.configure,
+           tkinsert, tklabel, tkmessageBox, tkpack, tkradiobutton,
+           tkscrollbar, tkset, tktext, "tktitle<-", tktoplevel,
+           tkwait.window, tkyview)
+
+importFrom(tkWidgets, fileBrowser, objNameToList, pickObjs)
+
+importFrom(widgetTools, makeViewer, writeList)
+
+
 export(OLINgui)      
-               
