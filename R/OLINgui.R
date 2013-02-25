@@ -390,7 +390,7 @@ fgbgvisu <- function(){
                   return()
              }
                          
-             index <- as.integer(strsplit(tclvalue(tkget(gui.22e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.22e))," ")[[1]]))]
+             index <- as.integer(strsplit(tclvalue(tkget(gui.22e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.22e))," ")[[1]]))]
             
             if (length(index)==0){
                index <- 1:dim(maM(get("obj",nenv)))[[2]] 
@@ -426,7 +426,7 @@ mavisu <- function(){
                   return()
              }
                 
-             index <- as.integer(strsplit(tclvalue(tkget(gui.22e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.22e))," ")[[1]]))]
+             index <- as.integer(strsplit(tclvalue(tkget(gui.22e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.22e))," ")[[1]]))]
             
             if (length(index)==0){
             index <- 1:dim(maM(get("obj",nenv)))[[2]] 
@@ -450,7 +450,7 @@ mxyplot <- function(){
                   return()
              }
                 
-             index <- as.integer(strsplit(tclvalue(tkget(gui.22e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.22e))," ")[[1]]))]
+             index <- as.integer(strsplit(tclvalue(tkget(gui.22e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.22e))," ")[[1]]))]
             
             if (length(index)==0){
             index <- 1:dim(maM(get("obj",nenv)))[[2]] 
@@ -483,7 +483,7 @@ mxy2plot <- function(){
              }
              
                 
-             index <- as.integer(strsplit(tclvalue(tkget(gui.22e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.22e))," ")[[1]]))]
+             index <- as.integer(strsplit(tclvalue(tkget(gui.22e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.22e))," ")[[1]]))]
             
             if (length(index)==0){
             index <- 1:dim(maM(get("obj",nenv)))[[2]] 
@@ -526,9 +526,9 @@ normalise <- function(){
           }
           
           
-          ALPHA    <- as.real(strsplit(tclvalue(tkget(gui.33e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.33e))," ")[[1]]))]
+          ALPHA    <- as.double(strsplit(tclvalue(tkget(gui.33e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.33e))," ")[[1]]))]
           if ((tclvalue(tkget(gui.34e))!="TRUE")&(tclvalue(tkget(gui.34e))!="FALSE")){
-          SCALE  <- as.real(strsplit(tclvalue(tkget(gui.34e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.34e))," ")[[1]]))]
+          SCALE  <- as.double(strsplit(tclvalue(tkget(gui.34e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.34e))," ")[[1]]))]
           } else {
          SCALE  <- tclvalue(tkget(gui.34e))
          }
@@ -684,7 +684,7 @@ anovapi <- function(){
                   return()
              }
     
-      index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
+      index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
     
       if (length(index)==0){
               index <- 1:dim(maM(get("obj",nenv)))[[2]] 
@@ -734,7 +734,7 @@ anovapl <- function(){
              }
 
   
-      index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
+      index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
     
       if (length(index)==0){
               index <- 1:dim(maM(get("obj",nenv)))[[2]] 
@@ -823,7 +823,7 @@ anovaintensity <- function(){
      l <- anovaint.args()
 
      if (!is.null(l[[1]])){
-      index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
+      index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
     
       if (length(index)==0){
               index <- 1:dim(maM(get("obj",nenv)))[[2]] 
@@ -914,7 +914,7 @@ anovaspa <- function(){
      l <- anovaspa.args()
 
      if (!is.null(l[[1]])){
-       index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
+       index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
     
       if (length(index)==0){
               index <- 1:dim(maM(get("obj",nenv)))[[2]] 
@@ -1025,7 +1025,7 @@ fdr.intensity <- function(){
 
      if (!is.null(l[[1]])){
     
-      index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
+      index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
     
       if (length(index)==0){
               index <- 1:dim(maM(get("obj",nenv)))[[2]] 
@@ -1116,7 +1116,7 @@ fdr.spa <- function(){
              }
      l <- fdr.spa.args();
      if (!is.null(l[[1]])){ 
-       index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
+       index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
     
         if (length(index)==0){
               index <- 1:dim(maM(get("obj",nenv)))[[2]] 
@@ -1230,7 +1230,7 @@ p.intensity <- function(){
              }
      l <- p.int.args();
      if (!is.null(l[[1]])){
-       index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
+       index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
     
         if (length(index)==0){
               index <- 1:dim(maM(get("obj",nenv)))[[2]] 
@@ -1346,7 +1346,7 @@ p.spa <- function(){
      l <- p.spa.args();
      if (!is.null(l[[1]])){
    
-        index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.real(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
+        index <- as.integer(strsplit(tclvalue(tkget(gui.42e))," ")[[1]])[!is.na(as.double(strsplit(tclvalue(tkget(gui.42e))," ")[[1]]))] 
     
         if (length(index)==0){
               index <- 1:dim(maM(get("obj",nenv)))[[2]] 
