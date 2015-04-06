@@ -1,5 +1,5 @@
 Package: OLINgui
-Version: 1.41.0
+Version: 1.41.1
 Title:  Graphical user interface for OLIN 
 Author: Matthias Futschik <mfutschik@ualg.pt>
 Maintainer:  Matthias Futschik <mfutschik@ualg.pt>
@@ -8,4 +8,17 @@ Imports: graphics, marray, OLIN, tcltk, tkWidgets, widgetTools
 Description: Graphical user interface for the OLIN package
 biocViews: Microarray, TwoChannel, QualityControl, Preprocessing, Visualization
 License: GPL-2
-URL: http://itb.biologie.hu-berlin.de/~futschik/software/R/OLIN/index.html
+URL: http://w3.ualg.pt/~mfutschik/software/R/OLIN/index.html
+
+
+
+
+
+
+
+
+
+
+
+
+
