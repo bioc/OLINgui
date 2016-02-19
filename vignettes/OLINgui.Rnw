@@ -6,7 +6,7 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage{a4wide}
 \title{Introduction to OLINgui}
-\author{Matthias E. Futschik\\ Institute for Theoretical Biology,  Humboldt-University\\ URL: \textit{http://itb.biologie.hu-berlin.de/$\sim$futschik/software/R/OLIN/index.html}}
+\author{Matthias E. Futschik\\ SysBioLab, Universidade do Algarve\\ URL: \textit{http://olin.sysbiolab.eu}}
 \begin{document}
 \maketitle
 \tableofcontents
@@ -30,7 +30,7 @@ This list  has to be built \emph{by hand} yet. However, most functions of the OL
 
 A brief introduction to the  functionality of \emph{OLINgui} will be given in section 3.
 For more details about the computational approaches, please refer to the OLIN package documentation
-and the reference~\cite{toni}. 
+and the reference~\cite{toni,toni2}. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -305,6 +305,8 @@ the results of the normalisation, the normalised data has to be exported (or sav
 %BIBLIOGRAPHY
 \begin{thebibliography}{99}
 \bibitem{toni} M.Futschik and T. Crompton (2004) Model selection and efficiency testing for normalisation of cDNA microarray data, \emph{Genome Biology}, 5:R60  
+
+\bibitem{toni2} M.E. Futschik and T. Crompton (2005) OLIN: optimized normalization, visualization and quality testing of two-channel microarray data, Bioinformatics, 21(8):1724-6 
 
 
 \end{thebibliography}
